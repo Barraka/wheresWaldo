@@ -1,0 +1,150 @@
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+body {
+    background-color: rgb(82, 60, 74);
+    
+}
+#root {
+  margin: 0 auto;
+  text-align: center;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; */
+  /* max-width: 100vw; */
+  /* overflow: auto; */
+}
+.app {
+    overflow: auto;
+}
+
+.selectBoard {
+    border: 2px solid rgb(170, 73, 134);
+    width: 50vw;
+}
+
+/* ---- In game ---- */
+.gameHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 0 15px;
+    height: 100px;
+}
+.gameWrapper {
+    position: relative;
+}
+.charWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;    
+    border: 3px solid black;
+    border-radius: 10px;
+    background-color: rgb(160, 169, 187);
+    box-shadow: 0 0px 5px 3px rgb(34, 36, 39);
+}
+.char {
+    height: 60px;
+    max-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+}
+.char img {
+    width: 100%;
+    height: 100%;
+}
+.closeup {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom:300;
+    z-index: 4;
+    background-color: aliceblue;
+    border: 3px solid black;
+    border-radius: 10px;
+    height: 200px;
+    width: 200px;
+}
+.displayWin {
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 400px;
+    width: 400px;
+    background-color: aquamarine;
+    border: 3px solid black;
+    border-radius: 10px;
+}
+.closeup img {
+    height: 100%;
+    width: 100%;
+}
+.boardWrapper {
+    position: relative;
+    overflow: auto;
+    top:0;
+    left:0;
+    width: 100%;
+}
+.backdrop {
+    position: fixed;
+    z-index:2;
+    top:0;
+    left:0;
+    right: 0;
+    bottom:0;
+    background-color: rgba(200,200,200,0.2);
+}
+.contextualMenu {
+    position: fixed;
+    top:0;
+    left:0;
+    z-index: 3;
+    background-color: rgba(200,200,200,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.contextWrapper {
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+.contextWrapper:hover {
+    outline: 3px solid cyan;
+}
+.valid {
+    background-color: green;
+}
+.invalid {
+    background-color: red;
+}
+
+.contextImageWrapper {
+    width: 80px;
+    height: 80px;
+}
+.contextImageWrapper img {
+    height: 100%;
+    width: 100%;
+}
