@@ -14,9 +14,7 @@ import DisplayWin from './DisplayWin';
 
 function Board1(props) {
     const [intro, setIntro] = useState('');
-    const [game, setGame] = useState('');
     const [menu, setMenu] = useState('');
-    const [choice, setChoice] = useState({});
     const [response, setResponse] = useState(false);
     const [backdrop, setBackdrop] = useState(false);
     const [charStyle1, setCharStyle1] = useState('charWrapper');
@@ -53,71 +51,36 @@ function Board1(props) {
     },[]);
 
     useEffect(()=>{
-    },[game]);
-
-    useEffect(()=>{
 
     },[menu]);
 
-    //When the user clicks on an image location
-    useEffect(()=>{
-        console.log('in useeffect choice: ,', choice);
-        // let flag=false;
-        // if(choice.img===cat) {
-        //     if(choice.xpos/1920 < 0.04) {
-        //         if(choice.ypos/(1080+100) >= 0.28 && choice.ypos/(1080+100) <=0.34) {
-        //             console.log('found the cat');
-        //             flag=true;
-        //         }
-        //     }            
-        // }
-        // if(choice.img===pirate) {
-        //     if(choice.xpos/1920 > 0.54 && choice.xpos/1920 < 0.585) {
-        //         if(choice.ypos/(1080+100) >= 0.378 && choice.ypos/(1080+100) <=0.463) {
-        //             console.log('found the Pirate');
-        //             flag=true;
-        //         }
-        //     }
-        // }
-        // if(choice.img===wizard) {            
-        //     if(choice.xpos/1920 > 0.21 && choice.xpos/1920 < 0.26) {
-        //         if(choice.ypos/(1080+100) >= 0.295 && choice.ypos/(1080+100) <=0.385) {
-        //             console.log('found the Wizard');
-        //             flag=true;
-        //         }
-        //     }
-        // }
-        // if(!flag)console.log('Wrong guess');
-        // setResponse(flag);
-        // setMenu('');
-    },[choice]);
 
     function handleSetChoice(o) {
         let flag=false;
         setResponse(true);
-        console.log('o: ', o);
+
+        console.log('calculatedX: ', o.calculatedX);       
+        console.log('calculatedY: ', o.calculatedY);
+        
         if(o.img===cat) {
-            if(o.xpos/1920 < 0.04) {
-                if(o.ypos/(1080+100) >= 0.28 && o.ypos/(1080+100) <=0.34) {
-                    console.log('found the cat');
+            if(o.calculatedX< 0.045) {
+                if(o.calculatedY >= 0.22 && o.calculatedY <=0.28) {
                     flag=true;
                     setCharStyle1('charWrapper valid');
                 }
             }            
         }
         if(o.img===pirate) {
-            if(o.xpos/1920 > 0.54 && o.xpos/1920 < 0.585) {
-                if(o.ypos/(1080+100) >= 0.378 && o.ypos/(1080+100) <=0.463) {
-                    console.log('found the Pirate');
+            if(o.calculatedX > 0.54 && o.calculatedX < 0.585) {
+                if(o.calculatedY >= 0.32 && o.calculatedY <=0.41) {
                     flag=true;
                     setCharStyle2('charWrapper valid');
                 }
             }
         }
         if(o.img===wizard) {            
-            if(o.xpos/1920 > 0.21 && o.xpos/1920 < 0.26) {
-                if(o.ypos/(1080+100) >= 0.295 && o.ypos/(1080+100) <=0.385) {
-                    console.log('found the Wizard');
+            if(o.calculatedX > 0.21 && o.calculatedX < 0.255) {
+                if(o.calculatedY >= 0.22 && o.calculatedY <=0.32) {
                     flag=true;
                     setCharStyle3('charWrapper valid');
                 }
@@ -143,20 +106,18 @@ function Board1(props) {
         setIntro('');
     }
     function toggleMenu(e) {
-        // console.log('rect: ', e.target.getBoundingClientRect());
-        if(e!=='remove') {
-            console.log('scroll left: ', e.currentTarget.scrollLeft);
-        }
-        
-        // console.log('in toggle menu. response: ', menu);
+       
         if(zoom) {
             setZoom(false);
             setBackdrop(false);
         }
         else if(menu==='') {
-            const sLeft=e.currentTarget.scrollLeft;
-            const sDown=e.currentTarget.scrollTop;
-            setMenu(<ContextualMenu sLeft={sLeft} sDown={sDown} response={response} event={e} img1={cat} name1='Cat' img2={pirate} name2='Pirate' img3={wizard} name3='Wizard' handleSetChoice={handleSetChoice} />); 
+            let offsetX=e.target.parentElement.scrollLeft;
+            let offsetY=window.scrollY;
+            const calculatedX=(e.clientX+offsetX)/e.target.getBoundingClientRect().width;
+            const calculatedY=(e.clientY-100+offsetY)/e.target.getBoundingClientRect().height;     
+
+            setMenu(<ContextualMenu calculatedX={calculatedX} calculatedY={calculatedY} response={response} event={e} img1={cat} name1='Cat' img2={pirate} name2='Pirate' img3={wizard} name3='Wizard' handleSetChoice={handleSetChoice} />); 
             setBackdrop(true);
         }
         else if(e==='remove') {
@@ -176,8 +137,7 @@ function Board1(props) {
         <div className='board1 board'>
             <button onClick={toggleMenu}>Get menu state</button>
             {menu}
-            {intro}
-            {game}            
+            {intro}     
         </div>
     ); else {
         return(
@@ -212,7 +172,7 @@ function Board1(props) {
                 </div>
                 <div onClick={toggleMenu} className="boardWrapper">
                     {menu}
-                    <img src={board1} alt='game image' />
+                    <img src={board1} alt='game image' draggable='false'/>
                 </div>
             </div>
         )
