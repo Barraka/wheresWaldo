@@ -5,16 +5,28 @@ function DisplayWin(props) {
         console.log('submitting win');
         props.reset();
     }
+    function cancel() {
+
+    }
 
     return (
         <div className='displayWin'>
             <div className="winText">
-                Well done, you have found them all!
-                You have completed this board in x seconds.
-                enter place in the leaderboard:
+                Well done, you have found them all!<br/>
+                You have completed this board in x seconds.<br/>
+                
             </div>
-            <input ></input>
-            <button onClick={submit}>Submit</button>
+            <div className="inputWrapper">
+                <div className="winInputText">
+                    Enter place in the leaderboard:
+                </div>
+                <input className='winInput' placeholder='Your Name'></input>
+            </div>
+            
+            <div className="winButtonWrapper">
+                <button className='winButton' onClick={submit}>Submit</button>
+                <button className='winButton winCancel' onClick={cancel}>Continue<br/> without submitting</button>
+            </div>
 
         </div>
     )

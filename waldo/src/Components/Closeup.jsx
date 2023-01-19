@@ -5,7 +5,7 @@ function Closeup(props) {
 
     return (
         <div className='closeup'>
-            <img src={props.img} alt="" />
+            <img src={props.img} alt="Zoom in"  draggable='false'/>
         </div>
     )
 }
