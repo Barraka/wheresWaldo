@@ -27,16 +27,6 @@ function Game(props) {
 
     function toggleMenu(e) {
         if(menu==='') {
-            // let offsetX=window.scrollX;
-            // let offsetY=window.scrollY;
-            // const calculatedX=(e.clientX+offsetX)/e.target.getBoundingClientRect().width;
-            // const calculatedY=(e.clientY-100+offsetY)/e.target.getBoundingClientRect().height;    
-            console.log('boundingX: ', e.target.getBoundingClientRect().width);
-            console.log('boundingy: ', e.target.getBoundingClientRect().height);
-            console.log('e.clientX: ', e.clientX);
-            console.log('e.clientY: ', e.clientY);
-            console.log('x: ', e.clientX-e.target.getBoundingClientRect().left);
-            console.log('y: ', e.clientY-e.target.getBoundingClientRect().top);
             const calculatedX=(e.clientX-e.target.getBoundingClientRect().left)/e.target.getBoundingClientRect().width;
             const calculatedY=(e.clientY-e.target.getBoundingClientRect().top)/e.target.getBoundingClientRect().height; 
             
@@ -58,7 +48,6 @@ function Game(props) {
         setResponse(true);        
         
         if(o.img===reach.assets[0].img) {
-            
             if(o.calculatedX > reach.assets[0].xmin && o.calculatedX< reach.assets[0].xmax) {
                 if(o.calculatedY >= reach.assets[0].ymin && o.calculatedY <= reach.assets[0].ymax) {
                     flag=true;
@@ -70,10 +59,6 @@ function Game(props) {
             }            
         }
         if(o.img===reach.assets[1].img) {
-            console.log('xmin: ', reach.assets[1].xmin);
-            console.log('xmax: ', reach.assets[1].xmax);
-            console.log('x: ', o.calculatedX );
-            console.log('y: ', o.calculatedY );
             if(o.calculatedX > reach.assets[1].xmin && o.calculatedX < reach.assets[1].xmax) {
                 if(o.calculatedY >= reach.assets[1].ymin && o.calculatedY <= reach.assets[1].ymax) {
                     flag=true;
@@ -129,9 +114,7 @@ function Game(props) {
                         <img className='zoomHidden' ref={big2} data-big={reach.assets[1].imgBig} src={reach.assets[1].imgBig} alt="big" />
                         <img className='zoomHidden' ref={big3} data-big={reach.assets[2].imgBig} src={reach.assets[2].imgBig} alt="big" />
                     </div>
-                    <div className="gameHeader">
-                        
-                        {/* <Link to='/' >Home</Link> */}
+                    <div className="gameHeader">                
                         <div onMouseOver={zoomIn} onMouseOut={zoomOut} data-big={reach.assets[0].imgBig} className={charStyle1}>
                             <div className="char">
                                 <img src={reach.assets[0].img} alt={reach.assets[0].name}  draggable='false'/>
@@ -151,6 +134,10 @@ function Game(props) {
                                 <img src={reach.assets[2].img} alt={reach.assets[2].name}  draggable='false'/>
                             </div>
                             <div className="charName">{reach.assets[2].name}</div>
+                        </div>
+
+                        <div className='homeIcon' onClick={props.reset}>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M11 39h7.5V26.5h11V39H37V19.5L24 9.75 11 19.5Zm-3 3V18L24 6l16 12v24H26.5V29.5h-5V42Zm16-17.65Z"/></svg>
                         </div>
                     </div>
                 </div>

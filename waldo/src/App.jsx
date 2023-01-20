@@ -7,17 +7,10 @@ function App() {
     const [output, setOutput] = useState('');
 
     useEffect(()=>{
-        setOutput(<SelectBoard reset={reset}/>);
+        setOutput(<SelectBoard/>);
     },[]);
 
-    // useEffect(()=>{
-    //     setOutput(<SelectBoard reset={reset}/>);
-    // },[output]);
 
-    function reset() {
-        setOutput('');
-        // setOutput(<SelectBoard reset={reset}/>);
-    }
 
     return (
         <div className='app'>
@@ -25,17 +18,6 @@ function App() {
             {output}
         </div>
     )
-
-    // return (
-    // <div className="app">
-    //     <Routes>
-    //         <Route path='/' element={<SelectBoard />} />
-    //         {/* <Route path='/board1' element={<Board />} /> */}
-
-    //     </Routes>
-    //     {/* <SelectBoard /> */}
-    // </div>
-    // )
 }
 
 export default App

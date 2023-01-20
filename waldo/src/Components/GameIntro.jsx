@@ -2,10 +2,6 @@ import React, { useEffect } from 'react'
 
 function GameIntro(props) {
     const reach=props.boardProps;
-    useEffect(()=>{
-        console.log('props:', props);
-        console.log('props.props: ', props.props);
-    },[]);
     
     return (
         <div className='intro'>
